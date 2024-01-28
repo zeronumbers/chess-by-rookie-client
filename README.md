@@ -9,11 +9,10 @@ the server side that deals with websocket server can be found in project called:
 
 # SVGs of pieces
 
-are in the /src/assets/defs.svg
-
-are made by: https://commons.wikimedia.org/wiki/User:Cburnett
-taken from: https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
-under license: Creative Commons Attribution-Share Alike 3.0 Unported
+- located at: /src/assets/defs.svg
+- are made by: https://commons.wikimedia.org/wiki/User:Cburnett
+- taken from: https://commons.wikimedia.org/wiki/Category:SVG_chess_pieces
+- under license: Creative Commons Attribution-Share Alike 3.0 Unported
 
 some small changes were made, they are written in that file as comment at the top of file.
 
@@ -23,8 +22,8 @@ some small changes were made, they are written in that file as comment at the to
 
 ## mention invlid instead of valid
 
-good: `Square` and `SquareUnvalidated`
-bad: `SquareValid` and `Square`
+- good: `Square` and `SquareUnvalidated`
+- bad: `SquareValid` and `Square`
 
 ## typescript union is singular
 
@@ -46,15 +45,15 @@ export type MoveType =
 
 ## x y
 
-x - file (in chess: a,b,c...)
-y - rank (in chess: 1,2,3...)
+- x: file (in chess: a,b,c...)
+- y: rank (in chess: 1,2,3...)
 
 both can be 0-7
 
 
 ## square
 
-an index of boards(color and piece)
+Index of boards(color and piece)
 
 there are two types of squares, valid and invalid.
 
@@ -62,40 +61,40 @@ because board is represented as 16x16 and chess field is 8x8, only the 8x8 are v
 
 ## algebraicSquare
 
-it is a square, but represented as a string that has normal chess name of square like 'e4'.
+It is a square, but represented as a string that has normal chess name of square like 'e4'.
 
 ## figure
 
-figure (of piece), in moveHistory it will be a string that holds a piece like '♞'.
+Figure (of piece), in moveHistory it will be a string that holds a piece like '♞'.
 
 ## move
 
-an action of user interacts with piece(s) on board.
-In chess this is called `half move` or `ply` (i think this one is rarely used outside of computing).
+Action of user interaction with piece(s) on board.
+
+In chess this is called `half move` or `ply` (I think this one is rarely used outside of computing).
 
 ## moveType
 
-indicator that tells how to update state if a move is taken.
+Indicator that tells how to update state if a move is taken.
 
 ## piece
 
-chess piece
+Chess piece
 
 ## vector piece
 
-a piece that can move in a line, so it is `queen, rook and bishop`
-non vector pieces are `king knight and pawn`
+Piece that can move in a line, so it is queen, rook and bishop, non vector pieces are king knight and pawn
 
 ## control
 
 An attacking pseudo move.
 For example a pawn cannot go to diagonal square if there is no enemy there, however it controls such square, and enemy king cannot go there.
 
-Important to note that the squares in front of pawn are not controlled (by the pawn itself) even if it actually can go there.
+It is important to note that the squares in front of pawn are not controlled (by the pawn itself) even if it actually can go there.
 
 Also the square where the piece is located is not controlled by itself.
 
-to make code more general the empty square also can have control object, and it looks like an empty object, as opposed to control of pieces which may be an object of squares with direction
+To make code more general the empty square also can have control object, and it looks like an empty object, as opposed to control of pieces which may be an object of squares with direction
 
 # About react hooks
 
@@ -117,19 +116,24 @@ websocket server also has to be designed specificly for react strict mode, becau
 
 ## rewrite.tsx
 
-there is an unfinished rewrite, of websocket and webrtc custom hooks and server and components that use those. I managed to make it work with websocket, but for manual signaling had problems, additionally it has only necessary parts for webrtc, I didn't make error components.
+It is an unfinished rewrite, of websocket and webrtc custom hooks and server and components that use those.
 
-an attempt was made to make it work under strict mode, and it works for signaling with websocket.
+I managed to make it work with websocket, manual signaling is unfinished and has problems, additionally it has only necessary parts for webrtc, I didn't make error components.
+
+An attempt was made to make it work under strict mode, and it works for signaling with websocket.
 
 I am no longer sure that making manual signaling mimic websocket is a good idea.
 The easiest thing to do is just completely integrate both signalings into their own webrtc hooks with big code duplication of webrtc in both cases.
 
 Why not mimic?
+
 It feels wrong that I have to wrap it all like this, it is oop style of coding where you do everything as object.
+
 I guess I also cannot use classes or prototypes, because I have to create their definition inside useeffect, and in that case they would be created each time, so there is no value from storing methods on prototype since prototype is going to be created each effect.
 Also it is just additional work that doesnt do much, I get a handler that calls send that calls a handler that sets state, where I could set state in the first handler. It becomes more difficult to reason about.
 
 Why not functions as in first design, the one that works?
+
 The solution to race conditions of asynchronous functions is to see `ignore` that is not passed as argument, passing it as argument would create a copy with a frozen value. I would say it is a disaster already because to avoid race condition we have to introduce such mutable state.
 Could an object with prop work? Probably ref should work, but it is shared for all handlers, expired and newly created ones, so that is a problem.
 
@@ -166,13 +170,18 @@ This gets trickier because websocket is used for signaling, so should it be retu
 see file `how-project-was-created.md`
 
 2. install dependencies:
-   `npm install ramda react-router-dom react-window uuid`
+```
+npm install ramda react-router-dom react-window uuid
+```
 
 3. install devDependencies:
-   `npm install --save-dev @types/ramda @vitejs/plugin-basic-ssl vite-plugin-svgr vitest`
+```
+npm install --save-dev @types/ramda @vitejs/plugin-basic-ssl vite-plugin-svgr vitest
+```
 
 4. vite.config.ts - add bunch of stuff
-```import { defineConfig } from 'vite';
+```
+import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react-swc';
 import svgr from 'vite-plugin-svgr';
 import basicSsl from '@vitejs/plugin-basic-ssl';
@@ -199,7 +208,9 @@ export default defineConfig({
 ```
 
 5. src/vite-env.d.ts - add line:
-`/// <reference types="vite-plugin-svgr/client" />`
+```
+/// <reference types="vite-plugin-svgr/client" />
+```
 
 6. package.json - add test script and change build to be without tsc.
 
