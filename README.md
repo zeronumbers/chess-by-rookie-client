@@ -23,10 +23,8 @@ some small changes were made, they are written in that file as comment at the to
 
 ## mention invlid instead of valid
 
-    good: `Square` and `SquareUnvalidated`
-    bad: `SquareValid` and `Square`
-
-
+good: `Square` and `SquareUnvalidated`
+bad: `SquareValid` and `Square`
 
 ## typescript union is singular
 
@@ -62,38 +60,31 @@ there are two types of squares, valid and invalid.
 
 because board is represented as 16x16 and chess field is 8x8, only the 8x8 are valid squares, the rest are used to figure out if the move is outside of board and is therefore impossible.
 
-
 ## algebraicSquare
 
 it is a square, but represented as a string that has normal chess name of square like 'e4'.
 
-
 ## figure
 
 figure (of piece), in moveHistory it will be a string that holds a piece like '♞'.
-
 
 ## move
 
 an action of user interacts with piece(s) on board.
 In chess this is called `half move` or `ply` (i think this one is rarely used outside of computing).
 
-
 ## moveType
 
 indicator that tells how to update state if a move is taken.
-
 
 ## piece
 
 chess piece
 
-
 ## vector piece
 
 a piece that can move in a line, so it is `queen, rook and bishop`
 non vector pieces are `king knight and pawn`
-
 
 ## control
 
@@ -105,8 +96,6 @@ Important to note that the squares in front of pawn are not controlled (by the p
 Also the square where the piece is located is not controlled by itself.
 
 to make code more general the empty square also can have control object, and it looks like an empty object, as opposed to control of pieces which may be an object of squares with direction
-
-
 
 # About react hooks
 
