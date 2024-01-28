@@ -1,0 +1,343 @@
+:root {
+  box-sizing: border-box;
+  word-break: break-all;
+}
+
+body {
+  --margin: 1rem;
+  margin-left: var(--margin);
+  margin-right: var(--margin);
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.TextArea:invalid {
+  border: 0.2rem solid red;
+}
+
+.TextArea:valid {
+  border: 0.2rem solid green;
+}
+
+/* maybe use opacity to allow the actual square color be visible? */
+/* Maybe make controls and move to be of color of the piece? */
+.chess {
+  --hue-active: 240;
+  --hue-last: 0;
+  --square--controls: hsl(var(--hue-active), 30%, 50%);
+  --square--move: hsl(var(--hue-active), 50%, 50%);
+
+
+  --black: hsl(0, 0%, 10%);
+  --white: hsl(0, 0%, 90%);
+}
+
+.rotate-svg-elem {
+  transform-origin: center center;
+  transform: rotate(180deg);
+  transform-box: fill-box;
+}
+
+.rotate {
+  transform: rotate(180deg);
+}
+
+.files-or-ranks {
+  /* center text horizontally */
+  text-anchor: middle;
+  /* center text vertically */
+  dominant-baseline: middle;
+}
+
+.chess__inner {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: calc(var(--margin) * -1);
+  margin-right: calc(var(--margin) * -1);
+}
+
+.chess__sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+  gap: 1rem;
+  margin-left: var(--margin);
+  margin-right: var(--margin);
+}
+
+.chess__board {
+  width: 100vmin;
+  height: 100vmin;
+  display: grid;
+  grid-template-rows: repeat(10, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+}
+
+.chess__board-buttons {
+  z-index: 2;
+  grid-column: 2 / 10;
+  grid-row: 2 / 10;
+  display: grid;
+  grid-template-rows: repeat(8, 1fr);
+  grid-template-columns: repeat(8, 1fr);
+  /* overwriting default fieldset styles below */
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+.chess__board-button {
+  background: transparent;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+
+.chess-board__visuals {
+  grid-column: 1 / 11;
+  grid-row: 1 / 11;
+}
+
+.message-of-opponent-requests {
+  background-color: green;
+  grid-column: 1 / 11;
+  grid-row: 1 / 2;
+}
+.message-of-opponent-requests > text {
+  background-color: green;
+  font: bold 49px serif;
+  text-align: left;
+  fill: red;
+  /* center text horizontally */
+  /* text-anchor: middle; */
+  /* center text vertically */
+  dominant-baseline: middle;
+}
+
+.chess-board {
+  transition: background-color 1s linear, fill 1s linear;
+}
+
+
+
+.chess-board--white {
+  background-color: hsl(0, 0%, 50%);
+  fill: var(--white);
+}
+
+.chess-board--black {
+  background-color: hsl(0, 0%, 50%);
+  fill: var(--black);
+}
+
+
+.chess__message {
+}
+.chess__info {
+}
+
+.chess__move-history {
+}
+
+.move-history {
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+/* This is not bem, but thats the only way. */
+.move-history__list > ol {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+.move-history__row--white {
+  background-color: hsl(0, 0%, 90%);
+}
+.move-history__row--black {
+  background-color: hsl(0, 0%, 80%);
+}
+
+
+.square--origin {
+  --square-color: hsl(var(--hue-active), 50%,25%);
+  background-color: hsl(var(--hue-active), 50%, 25%);
+}
+
+.square--controls {
+  border: 0.4rem solid hsl(var(--hue-active), 50%, 50%);
+}
+
+.square--move {
+  background-color: hsl(var(--hue-active), 70%, 75%);
+  border-radius: 50%;
+}
+
+.square--origin {
+  --square-color: hsl(var(--hue-active), 50%, 40%);
+}
+
+.square--target {
+  --square-color: hsl(var(--hue-active), 90%, 50%);
+}
+
+.square--previous-move-origin {
+  --square-color: hsl(var(--hue-last), 90%, 15%);
+}
+
+.square--previous-move-target {
+  --square-color: hsl(var(--hue-last), 90%, 25%);
+}
+
+
+.square--black {
+  --square-color: hsl(0, 0%, 45%);
+}
+
+.square--white {
+  --square-color: hsl(0, 0%, 55%);
+}
+
+
+
+.piece--white {
+  --piece-color: var(--white);
+  --piece-outline: var(--black);
+}
+.piece--black {
+  --piece-color: var(--black);
+  --piece-outline: var(--white);
+}
+
+.square--controlled-by-white {
+  --square--controlled-by: var(--white);
+}
+.square--controlled-by-black {
+  --square--controlled-by: var(--black);
+}
+.square--controlled-by-check {
+  --square--controlled-by: hsl(var(--hue-last), 100%, 50%);
+}
+
+.promotion {
+}
+
+.promotion__items {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 4.1rem);
+  /* extra spacing to avoid missclicks */
+  gap: 1.5rem;
+}
+
+.promotion__item {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  align-items: center;
+  border: 0.2rem solid var(--black);
+  background-color: var(--white);
+  border-radius: 0.5rem;
+  padding: 0.3rem;
+}
+
+/* .filter-bnw { */
+/*   filter: grayscale(100%); */
+/* } */
+
+
+.capturedPieces {
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.capturedPieces__pieces {
+  background-color: hsl(0, 0%, 50%);
+  display: flex;
+  /* flex-wrap: wrap; result is undesired */
+  height: 1rem;
+  padding: 0;
+  margin: 0;
+}
+.capturedPieces__piece {
+  list-style: none;
+  height: 100%; /* required for firefox to render correctly */
+}
+.capturedPieces__img {
+  height: 100%;
+}
+
+.pinned__line {
+  stroke: hsl(0, 70%, 50%);
+  stroke-width: 4;
+}
+
+.block {
+  display: block;
+}
+
+.button {
+  padding: 0.2rem;
+}
+.button--submit {
+  font-weight: bold;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(212, 100%, 50%); /* same color as progress element */
+}
+
+
+.legend__svg {
+  display: block;
+  width: 4rem;
+  height: 4rem;
+}
+
+.copy {
+  display: inline-flex;
+  flex-wrap: wrap;
+  padding: 0.1rem;
+  border-radius: 0.2rem;
+  align-items: center; /* text of button should be on same line as text of status */
+}
+.copy--success {
+  background-color: hsl(90, 65%, 50%);
+}
+.copy--fail {
+  background-color: hsl(0, 70%, 50%);
+}
+.copy__button {
+}
+.copy__status {
+}
+.copy__status--success {
+}
+.copy__status--fail {
+}
+
+.details {
+  --size: 0.2rem;
+  display: inline-block;
+  border: var(--size) solid hsl(220, 50%, 10%);
+  border-radius: 0.5rem;
+  /* not sure about setting color here because content might have to be some other color */
+  color: hsl(220, 50%, 10%);
+}
+.details__content {
+  background-color: hsl(220, 50%, 95%);
+  border-radius: 0 0 var(--size) var(--size);
+  padding: 1rem;
+}
+.details__summary {
+  /* list-style: none; */
+  padding: 0.5rem;
+  font-weight: bold;
+  background-color: hsl(220, 50%, 90%);
+  border-radius:  var(--size);
+}
+.details[open] > summary {
+  border-radius: var(--size) var(--size) 0 0;
+}
+
+.errors {
+  margin-bottom: 1rem;
+}
