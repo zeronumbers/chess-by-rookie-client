@@ -3,6 +3,8 @@ import { Link, useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import { GameStateForWebRTC } from '../core/globals';
 
+import { Copy } from './Copy';
+
 import {
   useWebRTCWithServer,
   mutateForAnswerer,
@@ -66,13 +68,12 @@ const HowToConnectOfferer = (id: string) =>
         <p>
           Link to invite opponent:
           <Link to={link}>join game</Link>
-          <button
-            onClick={() => {
-              navigator.clipboard.writeText(link);
-            }}
-          >
-            copy invite link
-          </button>
+          <Copy
+            value={`${window.location.origin}${
+              import.meta.env.BASE_URL
+            }${link}`}
+            description="invite link"
+          />
         </p>
       </>
     );
