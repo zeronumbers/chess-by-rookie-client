@@ -48,6 +48,7 @@ While ply is very meaningless word (if u don't know what it means), it would at 
 
 
 # TODO maybe view and core should be split into their own packages?
+
 # TODO on reverse tabbing is not reversed.
 
  **Not sure if this problem should be fixed**
@@ -56,4 +57,3 @@ you can select right square with tabbing, but the order of tabbing could be wron
 you can manually set tab index, but thats dangerous.
 
 Honestly a bigger problem is accessibility, and this is part of it, I guess to make it more accessibile I need to put handlers on svg elements, and have them have text, like 'c6: white king' and make it live area etc.
-

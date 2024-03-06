@@ -1,4 +1,6 @@
-import { useEffect, useRef, Dispatch, SetStateAction, RefObject } from 'react';
+import {
+ useEffect, useRef, Dispatch, SetStateAction, RefObject,
+} from 'react';
 import { whereEq } from 'ramda';
 
 export type Validate = (

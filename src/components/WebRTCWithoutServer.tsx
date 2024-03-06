@@ -97,7 +97,7 @@ function ChromiumIssueWarning({
             </li>
           </ol>
         </>
-    )}
+      )}
     />
   );
 }
@@ -115,9 +115,9 @@ function FirefoxIssueWarning({
       contentJSX={(
         <>
           <p>
-            At the moment of writing this: [2023-12-19] firefox basically doesn't
-            want you to use webrtc with manual signaling. As soon as offer is
-            submitted by
+            At the moment of writing this: [2023-12-19] firefox basically
+            doesn't want you to use webrtc with manual signaling. As soon as
+            offer is submitted by
             {' '}
             {nameAnswerer}
             , firefox
@@ -174,7 +174,8 @@ function FirefoxIssueWarning({
             </li>
           </ol>
           <p>
-            default value is 5000 (which equals to 5 seconds, as mentioned above)
+            default value is 5000 (which equals to 5 seconds, as mentioned
+            above)
           </p>
           <p>
             <a href=">https://bugzilla.mozilla.org/show_bug.cgi?id=1647289">
@@ -182,7 +183,7 @@ function FirefoxIssueWarning({
             </a>
           </p>
         </>
-    )}
+      )}
     />
   );
 }
@@ -380,12 +381,9 @@ function HowToConnectAnswerer({
 
                     .then(() => pcRef.current.createAnswer())
                     .then((answer) => ({
-                        type: 'answer',
-                        sdp: answer.sdp.replace(
-                          /a=ice-options:trickle\s\n/g,
-                          '',
-                        ),
-                      }))
+                      type: 'answer',
+                      sdp: answer.sdp.replace(/a=ice-options:trickle\s\n/g, ''),
+                    }))
                     .then((answer) => {
                       pcRef.current.setLocalDescription(answer);
                       return answer;
@@ -479,7 +477,12 @@ function HowToConnectOfferer({
           <Link to="/answerer">link</Link>
           {' '}
           to opponent
-          <Copy value={`${window.location.host}/join`} description="link" />
+          <Copy
+            value={`${window.location.origin}${
+              import.meta.env.BASE_URL
+            }/answerer`}
+            description="link"
+          />
         </li>
         <li>
           {hasRemoteDescription ? (

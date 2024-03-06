@@ -63,7 +63,7 @@ function LegendForChessboard() {
   return (
     <Details
       summaryText="Legend"
-      contentJSX={
+      contentJSX={(
         <div className="legend__content">
           <dl>
             <dt>
@@ -237,7 +237,7 @@ function LegendForChessboard() {
             </dd>
           </dl>
         </div>
-      }
+      )}
     />
   );
 }
@@ -528,7 +528,9 @@ function Chess(
           {!playerColor ? null : queueOfActionsToSend.length ? (
             <p>
               sending
-              {queueOfActionsToSend.length} actions
+              {queueOfActionsToSend.length}
+              {' '}
+              actions
             </p>
           ) : (
             <p>all actions sent</p>
