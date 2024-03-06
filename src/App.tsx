@@ -209,6 +209,7 @@ function Header({ children }) {
     <>
       <header>
         <h1>
+          {/* <Link to={`${import.meta.env.BASE_URL}`}>Chess by rookie</Link> */}
           <Link to="/">Chess by rookie</Link>
         </h1>
       </header>
@@ -220,63 +221,69 @@ function Header({ children }) {
 /* every path has Header and some component, maybe better to map over array of
    path/element and add Header using one function,
    in one place rather than adding it to each entry. */
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: (
-      <Header>
-        <Root />
-      </Header>
-    ),
-  },
+const router = createBrowserRouter(
+  [
+    {
+      path: '/',
+      element: (
+        <Header>
+          <Root />
+        </Header>
+      ),
+    },
 
-  {
-    path: '/offerer/:id',
-    element: (
-      <Header>
-        {/* <CreateGame Comp={OfferWithSocketSignaling} /> */}
-        <CreateGame Comp={WebRTCWithServerOfferer} />
-      </Header>
-    ),
-  },
+    {
+      path: '/offerer/:id',
+      element: (
+        <Header>
+          {/* <CreateGame Comp={OfferWithSocketSignaling} /> */}
+          <CreateGame Comp={WebRTCWithServerOfferer} />
+        </Header>
+      ),
+    },
 
-  {
-    path: '/offerer',
-    element: (
-      <Header>
-        <CreateGame Comp={WebRTCWithoutServerOfferer} />
-      </Header>
-    ),
-  },
+    {
+      path: '/offerer',
+      element: (
+        <Header>
+          <CreateGame Comp={WebRTCWithoutServerOfferer} />
+        </Header>
+      ),
+    },
 
-  {
-    path: '/answerer/:id',
-    element: (
-      <Header>
-        {/* <AnswerWithSocketSignaling /> */}
-        <WebRTCWithServerAnswerer />
-      </Header>
-    ),
-  },
+    {
+      path: '/answerer/:id',
+      element: (
+        <Header>
+          {/* <AnswerWithSocketSignaling /> */}
+          <WebRTCWithServerAnswerer />
+        </Header>
+      ),
+    },
 
-  {
-    path: '/answerer',
-    element: (
-      <Header>
-        <WebRTCWithoutServerAnswerer />
-      </Header>
-    ),
-  },
+    {
+      path: '/answerer',
+      element: (
+        <Header>
+          <WebRTCWithoutServerAnswerer />
+        </Header>
+      ),
+    },
 
+    {
+      path: '/hotseat',
+      element: (
+        <Header>
+          <CreateGame Comp={ChessStateProvider} isHotseat />
+        </Header>
+      ),
+    },
+  ],
   {
-    path: '/hotseat',
-    element: (
-      <Header>
-        <CreateGame Comp={ChessStateProvider} isHotseat />
-      </Header>
-    ),
+    // FIXME: added at [2024-02-19 18:27]
+    basename: `${import.meta.env.BASE_URL}`,
   },
-]);
+);
 
 function App() {
   return (
